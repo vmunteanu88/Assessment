@@ -21,9 +21,9 @@ In the Cypress folder there is a file for the UI  tests and another file for the
  - Open VisualStudioCode.
  - In the editor, load the folder named "CypressTests". 
  - Open a terminal and install the Cypress packages to this repository by running the command
-   npm install cypress@latest or npm install cypress--save-dev
+   npm install cypress--save-dev
    For more information about installing Cypress please follow the instructions at: https://docs.cypress.io/guides/getting-started/installing-cypress
- - In the terminal also run the command to add the "days.js" library since it is used in the tests. The command to install it is: "npm install dayjs" 
+
  
  
 ## Usage:

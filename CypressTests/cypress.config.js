@@ -8,7 +8,9 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    //UI BaseURL
     baseUrl: 'https://way2automation.com/way2auto_jquery'
+    //API BaseURL
     //baseUrl: 'https://jsonplaceholder.typicode.com'
   },
 });
