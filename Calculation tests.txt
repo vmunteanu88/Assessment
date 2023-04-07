@@ -1,0 +1,16 @@
+b.  How would you test an application performing the four basic functions: addition, 
+subtraction, multiplication, division?
+Since it is impossible to test all operations of an application that performs calculation, the focus would be to have a serie of control tests with given data and expected response:
+Examples for Addition:
+- Addition between two positive numbers
+- Addition between two negative numbers
+- Addition between positive and negative numbers
+- Addition to 0
+- Addition between different types of data (int + float)
+These tests would extend to all the operations available.
+
+In addition to the control tests the other focus would be to test the boundaries and edge cases. A few examples would be:
+- Multiply by 0
+- Divide by 0
+- Depending on the types of data supported, perform operations that would throw overflow errors. (e.g: Multiply large numbers)
+- Divide numbers that yield close to infinite amount of decimals (I would assume there is a limit to the amount of decimals displayed). An example  would be to divide numbers that are lose to yielding PI as a result.  

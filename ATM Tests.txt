@@ -1,0 +1,34 @@
+a. How would you test an ATM? What functions of the ATM would you check and from 
+what perspectives?
+
+Tests for an ATM:
+Considering there are multiple types of tests that can/should be applied to an ATM machine I will enlist in large the strategy for testing an ATM machine, without going into detailsover test scenarios.
+1. Functional - User perspective:
+- UI tests: check that all expected options are available in the menu of the ATM, internationalization, the screen is responsive to touch, and the buttons are actionable. 
+- Operation flows - Test that all operations available can be successfully completed, such as money withdrawl, deposits, interogations. Check that the menu cannot get stuck in various operations if there is an issue and an option to return to main menu is always chained. 
+- Check that the ATM dispenses mixed bills, depending on the sum withdrawn and cash available.
+- Check the Negative scenarios - such as receipt given contains the correct information, incorrect pin leads to the correct message to retry. 
+- Check boundary value analysis for amounts withdrawn vs cash available. 
+2. Functional - Bank perspective
+- Check logs and audit are complete with all the transactions done. Check which errors/warnings are logged and how, depending on the operation that does not complete successfully (e.g: when the ATM runs out of money and withdrawls are still attempted.)
+3. Performance 
+- ATM's are probaly functioning under an SLA for expected performance over each operation. Test that the API's are responding within the time limit no matter the type of transaction they are handling (e.g: Large sums withdrawn)
+4. Security - Since it's an ATM, security is of utmost importance. Various tests can be performed to make sure there are no data leaks and the withdrawl are made safe. 
+- Check PIN is masked on display.
+- Check receipts do not contain any information that should not be disclosed
+- Check correct PIN's do not work on expired cards.
+- Check user cannot insert the wrong PIN more than 3 times.
+5. Hardware tests - Since the ATM works on a closed hardware environment, it's necessary to perform hardware tests along, although for this you would need automotive test expertise. 
+From the software perspective, what could be possible to test is the integration between the software installed on the machine (e.g: an example of integration would be to check the capabilities of the hardware and that it supports the version of software that will be deployed on it).
+
+
+
+
+
+
+
+
+
+
+
+

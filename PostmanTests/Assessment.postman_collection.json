@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "b0e14c86-c110-445f-9405-fcaa85e4ad7b",
+		"name": "Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23805735"
+	},
+	"item": [
+		{
+			"name": "Check if user with username \"Samantha\" exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedUser = \"Samantha\";\r",
+							"\r",
+							"pm.test(\"Check if username Samantha is found\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    let jsonData = pm.response.json();\r",
+							"    var user = jsonData.find(user => {\r",
+							"        return user.username === expectedUser;\r",
+							"    })\r",
+							"    pm.expect(user).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a post",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var userId = _.random(1,10);\r",
+							"pm.environment.set(\"userId\",userId);\r",
+							"\r",
+							"pm.environment.set(\"title\", \"Title to my post\");\r",
+							"\r",
+							"pm.environment.set(\"body\", \"Lorem ipsum this is the body of the post that I have sent.\")\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check response code Created was returned\", () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Check post created has the values I have sent\", () => {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.userId).to.eql(pm.environment.get(\"userId\"));   \r",
+							"    pm.expect(jsonData.title).to.eql(pm.environment.get(\"title\"));\r",
+							"    pm.expect(jsonData.body).to.eql(pm.environment.get(\"body\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"userId\": {{userId}},\r\n    \"title\": \"{{title}}\",\r\n    \"body\": \"{{body}}\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/posts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check if request for getting comment takes longer than 1 second",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const threshold = 1000;\r",
+							"\r",
+							"pm.test(`Response code is 200`, function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Response time is less than ${threshold} miliseconds`, function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(threshold);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/posts/{{userId}}/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"posts",
+						"{{userId}}",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
